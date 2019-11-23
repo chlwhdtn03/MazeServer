@@ -1,4 +1,130 @@
-* { padding: 0; margin: 0; }
-        
+@font-face{
+    font-family: NanumGothic;
+    src: url('./fonts/nanumgothic.ttf') format('truetype');
+}
 
-canvas { background: #eee; display: block; margin: 0 auto; }
+body{
+    overflow-x: hidden;
+}
+
+.sec {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+        
+.title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 90px;
+    margin-top: -150px;
+}
+
+.section {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    max-height: 501px;
+}
+
+.chatting {
+    max-height: 501px;
+    overflow: auto;
+    background: #eee;
+    width: 300px;
+    margin-left: 32px;
+}
+
+#chatinput {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+canvas { background: #eee;}
+
+.profile {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 22%;
+}
+
+#pfTitle{
+    font-size: 40px;
+    font-family: 'Bebas Neue', cursive;
+
+    margin-bottom: 50px;
+}
+
+#item{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 52px;
+}
+
+#img{
+    border-radius: 50%;
+}
+
+#who{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 32px;
+    font-family: NanumGothic;
+
+}
+
+#link{
+    display: flex;
+    flex-direction: row;
+    margin-top: 32px;
+}
+
+#btn{
+    border: none;
+    background-color: white;
+}
+
+#Enter{
+    position: relative;
+    top: 250px;
+    left: 300px;
+}
+
+#result-form {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.close {
+    top: 0; 
+    float: right;
+}
+
+
+.result-content {
+    animation: fadein 0.6s;
+    background-color: white;
+    border: 1px solid gray;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+}

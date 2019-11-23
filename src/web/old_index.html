@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="MazeGame.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!--<script src ="MazeGame.js"></script>-->
+</head>
+
+<body>
+
+
+
+    <canvas id="myCanvas" width="460" height="320" onclick=""></canvas>
+    <div id="chat"></div>
+    <input type="text" id="chatinput">
+
+    <script>
+
+        var id = 0; // 접속했었던 플레이어 수
+        var joined = new Array(); // 자신을 제외한 나머지 플레이어들 객체
+        var myUser; // 자신 객체
+
+        var block = new Array(); // 장애물 배열
+        for (var i = 1; i <= 460; i++) {
+            for (var j = 1; j <= 320; j++) {
+                block[i] = new Array(); // 2중 배열
+                block[i][j] = 0; // 0 : 장애물 없음 || 1 : 장애물 있음
+            }
+        }
+
+        function User(name, x, y) { // 플레이어 객체
+            this.name = name; // 닉네임
+            this.x = x;
+            this.y = y;
+            this.leaved = false; // 나갔는지 여부
+        }
+        function findUser(name) { // 닉네임을 가지고 joined배열에서 플레이어 객체 찾기 (닉네임이 자신일 경우 myUser 반환)
+            if (name == myUser.name)
+                return myUser;
+            for (var i = 0; i < id; i++) {
+                if (joined[i].leaved == false) {
+                    if (joined[i].name == name) {
+                        return joined[i];
+                    }
+                }
+            }
+        }
+        webSocket = new WebSocket("ws://" + location.host + "/maze");
+        webSocket.onopen = function () { // 서버 접속됬을 때
+            var x = canvas.width / 2;
+            var y = canvas.height - 30;
+            var name = Math.floor(Math.random() * 10000) + 1;
+            webSocket.send("join " + x + " " + y + " " + name); // 서버에 닉네임, x, y 정보 전송
+            myUser = new User(name, x, y); // 자신의 객체정보 설정
+            draw();
+        };
+        webSocket.onclose = function () { // 서버 닫혔을때, 접속 안될때
+            alert("서버와 연결이 끊겼습니다.");
+        };
+        webSocket.onmessage = function (a) {
+            console.log(a.data);
+            var cmd = a.data.split(" ");
+            // move (nickname) (x좌표) (y좌표)
+            // 라고 메세지가 오면,
+            // cmd[0]은 move, cmd[1]은 (nickname), cmd[2]에는 (x좌표), cmd[3]에는 (y좌표)
+            if (cmd[0] == "move") {
+                // 서버에게 좌표 받고 해당 플레이어 움직이기
+                var user = findUser(cmd[1]);
+                user.x = parseInt(cmd[2]);
+                user.y = parseInt(cmd[3]);
+                draw(); // 캔버스 새로고침
+            }
+            if (cmd[0] == "chat") {
+                // 서버에게 채팅 데이터 받고 출력하기 
+                var user = findUser(cmd[1]);
+                var msg = new String();
+                for (var i = 2; i < cmd.length; i++) {
+                    msg += " " + cmd[i];
+                }
+                printchat(user.name + " - " + msg);
+            }
+            if (cmd[0] == "join") {
+                // 서버에게 플레이어 접속 정보 받기
+                // 서버에 나중에 들어왔을때, 새로운 플레이어가 들어왔을때, 서버에게 정보 받음
+                if (cmd[1] == myUser.name)
+                    return;
+                joined[id++] = new User(cmd[1], parseInt(cmd[2]), parseInt(cmd[3]));
+                draw(); // 새로 들어온 플레이어 표시해야 되니까 새로고침
+            }
+            if (cmd[0] == "leave") {
+                // 서버에게 플레이어 접속 해제 정보 받기
+                if (cmd[1] == myUser.name)
+                    return;
+                findUser(cmd[1]).leaved = true;
+                draw(); // 나간 플레이어 지워야 되니까 새로고침
+            }
+            if (cmd[0] == "block") { // 장애물 관련 메세지
+                // 서버에게 장애물 정보 받기
+                // 서버에 나중에 들어왔을때, 블럭이 설치되었을때, 서버에게 정보 받음
+                if (cmd[1] == "place") {
+                    block[parseInt(cmd[2])][parseInt(cmd[3])] = 1; // 서버에서 준 장애물 좌표로 블럭 설치
+                } else if (cmd[1] == "destory") {
+                    block[parseInt(cmd[2])][parseInt(cmd[3])] = 0; // 서버에서 준 장애물 좌표로 블럭 제거
+                }
+                draw(); // 캔버스 새로고침
+            }
+        }
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var dx = 20;
+        var dy = -20;
+
+        function printchat(msg) {
+            var p = document.createElement("p");
+            p.innerHTML = msg;
+            document.getElementById("chat").prepend(p);
+        }
+
+        $("input[id=chatinput]").keypress(function (e) {
+
+            if (e.keyCode == 13) {
+                webSocket.send("chat " + $("input[id=chatinput]").val());
+                $("input[id=chatinput]").val("");
+            }
+        });
+
+        function draw(event) {
+
+
+            if (event != undefined) { // 키보드 눌렀을때 true
+                // 키보드를 눌렀을때 위치 이동 정보를 서버에게 전송
+                // ※ 정보 전송만 하기 때문에 그림 그리는 기능은 지금 이 IF문 안에서 사용하면 안댐 ※
+                var rx = myUser.x;
+                var ry = myUser.y;
+                if (myUser.y > 10) { //up
+                    if (event.keyCode == 38)
+                        ry += dy;
+                }
+                if (myUser.y < 310) {
+                    if (event.keyCode == 40)
+                        //down
+                        ry -= dy;
+                }
+                if (myUser.x > 20) {
+                    //left
+                    if (event.keyCode == 37)
+                        rx -= dx;
+                }
+                if (myUser.x < 450) {
+                    //right
+                    if (event.keyCode == 39)
+                        rx += dx;
+                }
+                if (event.keyCode == 32) {
+                    webSocket.send("block place " + rx + " " + ry); // 블럭 설치 요청
+                    // block[myUser.x][myUser.y] = 1;
+                }
+                if (event.keyCode == 69) {
+                    webSocket.send("block destory " + rx + " " + ry); // 블럭 파괴 요청
+                    // block[myUser.x][myUser.y] = 0;
+                }
+                if (rx != myUser.x || ry != myUser.y) { // 방향키 눌렀을때 
+                    console.log(rx, ry);
+                    webSocket.send("move " + rx + " " + ry); // 서버에게 자신의 x와 y좌표 전송
+                }
+            } else {
+                // 서버에서 플레이어들, 장애물 위치 새로고침 할때 실행됨
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                /* 장애물 그리기 */
+                for (var i = 1; i <= 460; i++) {
+                    for (var j = 1; j <= 320; j++) {
+                        if (block[i][j] == 1) {
+                            ctx.beginPath();
+                            ctx.rect(i - 10, j - 10, 20, 20);
+                            ctx.fillStyle = "black";
+                            ctx.fill();
+                            ctx.closePath();
+                        }
+                    }
+                }
+
+                /* 다른 플레이어 그리기 */
+                for (var i = 0; i < id; i++) {
+                    if (joined[i].leaved == false) { // 접속한 플레이어들만
+                        ctx.beginPath();
+                        ctx.arc(joined[i].x, joined[i].y, 10, 0, Math.PI * 2);
+                        ctx.fillStyle = "red";
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                }
+
+                /* 자기 캐릭터 그리기 */
+                ctx.beginPath();
+                ctx.arc(myUser.x, myUser.y, 10, 0, Math.PI * 2);
+                ctx.fillStyle = "green";
+                ctx.fill();
+                ctx.closePath();
+            }
+
+
+        }
+
+        document.addEventListener('keydown', function (event) {
+            draw(event);
+        });
+    </script>
+
+
+</body>
+
+</html>

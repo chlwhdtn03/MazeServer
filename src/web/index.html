@@ -1,35 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="MazeGame.css">
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!--<script src ="MazeGame.js"></script>-->
 </head>
-
 <body>
 
+        <div id="result-form" style="display: none">
+                <div class="result-content">
+                    <form id="result">
+                        <span class="close" onclick="hide()">닫기</span>
+                        <span id="notice" style="padding-top: 10px;">결과</span>
+                    </form>
+                </div>
+            </div>
 
 
-    <canvas id="myCanvas" width="460" height="320" onclick=""></canvas>
+  <img src = "i.jpg" width = "100" hegith = "100" onclick = "Lobby()" id = "Enter"> 
+    <div class="sec">
+        <h1 class="title">DDANG DDA MOK KI</h1>
+    
+        <section class="section">
+            <canvas id="myCanvas" width="720" height="501"
+                    onclick=""></canvas>
+            <div class="chatting">
+                <input type="text" id="chatinput">
+            </div>
+        </section>
+    </div>
+
+    <div class="profile">
+        <div id="pfTitle">Developers</div>
+
+        <div id="item">
+            <img src="./images/cwh.jpg" alt="" width="200px" id="img">
+            <div id="who">
+                <h3>최우혁</h3>
+                <span>대머리 게임 개발자. 병약해보이지만 은근 힘이 쎈 반전매력이 있다.</span>
+
+                <div id="link">
+                    <button onclick="window.open('https://www.facebook.com/profile.php?id=100011682890795', 'demori');" 
+                    id="btn">
+                        <img src="./images/facebook.png" alt="" width="30px">
+                    </button>
+                    <button onclick="window.open('https://github.com/ChoiWooHyuk2', 'demori');" 
+                    id="btn">
+                        <img src="./images/-github-.png" alt="" width="30px">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="item">
+            <img src="./images/cjs.jpg" alt="" width="200px" id="img">
+            <div id="who">
+                <h3>최종수</h3>
+                <span>자랑스러운 애플파이의 부장님이시다. 자바랑 결혼할 예정이다.</span>
+    
+                <div id="link">
+                    <button onclick="window.open('https://www.facebook.com/chlwhdtn', 'javalove');" 
+                       id="btn">
+                        <img src="./images/facebook.png" alt="" width="30px">
+                    </button>
+                    <button onclick="window.open('https://github.com/chlwhdtn03', 'javalove');" 
+                    id="btn">
+                        <img src="./images/-github-.png" alt="" width="30px">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="item">
+            <img src="./images/yww.jpg" alt="" width="200px" id="img">
+            <div id="who">
+                <h3>윤원우</h3>
+                <span>내가 짱이다. 그냥 내가 짱이다.</span>
+        
+                <div id="link">
+                    <button onclick="window.open('https://www.facebook.com/profile.php?id=100011104596344', 'shinthing');" 
+                       id="btn">
+                        <img src="./images/facebook.png" alt="" width="30px">
+                    </button>
+                    <button onclick="window.open('https://github.com/Yoonwonwoo', 'shinthing');" 
+                        id="btn">
+                        <img src="./images/-github-.png" alt="" width="30px">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
 
-        var id = 0; // 접속했었던 플레이어 수
+
+    var id = 0; // 접속했었던 플레이어 수
         var joined = new Array(); // 자신을 제외한 나머지 플레이어들 객체
         var myUser; // 자신 객체
         
         var block = new Array(); // 장애물 배열
-        for (var i = 1; i <= 460; i++) {
-            for (var j = 1; j <= 320; j++) {
+        for (var i = 1; i <= 720; i++) {
+            for (var j = 1; j <= 501; j++) {
                 block[i] = new Array(); // 2중 배열
-                block[i][j] = 0; // 0 : 장애물 없음 || 1 : 장애물 있음
+                block[i][j] = 0; // 0 : 장애물 없음 || 1 : BLUE 장애물 || 2 : RED 장애물
             }
         }
+
+        function hide() {
+            
+            $("#result-form").hide();
+        }
+
 
         function User(name, x, y) { // 플레이어 객체
             this.name = name; // 닉네임
@@ -48,6 +134,35 @@
                 }
             }
         }
+
+        function Main()
+        {
+            
+        }
+
+        function Lobby()
+        {
+            alert("로비입니다.");
+            var image = document.getElementById("Enter");
+            image.remove();
+            
+            var image2 = document.createElement("img");
+            image2.setAttribute("src","i2.jpg");
+            image2.setAttribute("height","100");
+            image2.setAttribute("width","100");
+            image2.setAttribute("id","Enter");
+            image2.setAttribute("onclick","Ingame(this)");
+            document.body.prepend(image2);
+        }
+
+        function choice_Team()
+        {
+            alert("팀선택입니다.");
+        }
+
+        function Ingame(img) {
+        img.remove();
+        
         webSocket = new WebSocket("ws://" + location.host + "/maze");
         webSocket.onopen = function () { // 서버 접속됬을 때
             var x = canvas.width / 2;
@@ -73,6 +188,35 @@
                 user.y = parseInt(cmd[3]);
                 draw(); // 캔버스 새로고침
             }
+            if  (cmd[0] == "end") { // 끝났을 경우
+                var blue = 0, red = 0;
+                for (var i = 1; i <= 719; i++) {
+                    for (var j = 1; j <= 500; j++) {
+                        if(block[i][j] == 1) {
+                            blue++;
+                        } else if(block[i][j] == 2) {
+                            red++;
+                        }
+                    }
+                }
+                $("#result-form").show();
+                if(blue > red) {
+                    $("#notice").text("BLUE : " + blue + " vs RED : " + red + " || " + "BLUE팀이 승리했습니다!");
+                } else if(blue < red) {
+                    $("#notice").text("BLUE : " + blue + " vs RED : " + red + " || " + "RED팀이 승리했습니다!");
+                } else {
+                    $("#notice").text("BLUE : " + blue + " vs RED : " + red + " || " + "동점입니다..");
+                }
+            }
+            if (cmd[0] == "chat") {
+                // 서버에게 채팅 데이터 받고 출력하기 
+                var user = findUser(cmd[1]);
+                var msg = new String();
+                for (var i = 2; i < cmd.length; i++) {
+                    msg += " " + cmd[i];
+                }
+                printchat(user.name + " - " + msg);
+            }
             if (cmd[0] == "join") {
                 // 서버에게 플레이어 접속 정보 받기
                 // 서버에 나중에 들어왔을때, 새로운 플레이어가 들어왔을때, 서버에게 정보 받음
@@ -92,7 +236,7 @@
                 // 서버에게 장애물 정보 받기
                 // 서버에 나중에 들어왔을때, 블럭이 설치되었을때, 서버에게 정보 받음
                 if (cmd[1] == "place") {
-                    block[parseInt(cmd[2])][parseInt(cmd[3])] = 1; // 서버에서 준 장애물 좌표로 블럭 설치
+                    block[parseInt(cmd[2])][parseInt(cmd[3])] = (cmd[4] == "blue") ? 1 : 2; // 서버에서 준 장애물 좌표로 블럭 설치
                 } else if(cmd[1] == "destory") {
                     block[parseInt(cmd[2])][parseInt(cmd[3])] = 0; // 서버에서 준 장애물 좌표로 블럭 제거
                 }
@@ -104,6 +248,21 @@
         var dx = 20;
         var dy = -20;
 
+        function printchat(msg) {
+            var p = document.createElement("p");
+            p.innerHTML = msg;
+            p.style.margin = "0";
+            document.getElementsByClassName("chatting")[0].prepend(p);
+        }
+
+        $("input[id=chatinput]").keypress(function (e) {
+
+            if (e.keyCode == 13) {
+                webSocket.send("chat " + $("input[id=chatinput]").val());
+                $("input[id=chatinput]").val("");
+            }
+        });
+
         function draw(event) {
 
 
@@ -112,11 +271,11 @@
             // ※ 정보 전송만 하기 때문에 그림 그리는 기능은 지금 이 IF문 안에서 사용하면 안댐 ※
                 var rx = myUser.x;
                 var ry = myUser.y;
-                if (myUser.y > 10) { //up
+                if (myUser.y > 20) { //up
                     if (event.keyCode == 38)
                         ry += dy;
                 }
-                if (myUser.y < 310) {
+                if (myUser.y < 490) {
                     if (event.keyCode == 40)
                         //down
                         ry -= dy;
@@ -126,7 +285,7 @@
                     if (event.keyCode == 37)
                         rx -= dx;
                 }
-                if (myUser.x < 450) {
+                if (myUser.x < 700) {
                     //right
                     if (event.keyCode == 39)
                         rx += dx;
@@ -148,12 +307,13 @@
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 /* 장애물 그리기 */
-                for (var i = 1; i <= 460; i++) {
-                    for (var j = 1; j <= 320; j++) {
-                        if (block[i][j] == 1) {
+                for (var i = 1; i <= 719; i++) {
+                    for (var j = 1; j <= 500; j++) {
+                        
+                        if (block[i][j] > 0) {
                             ctx.beginPath();
                             ctx.rect(i - 10, j - 10, 20, 20);
-                            ctx.fillStyle = "black";
+                            ctx.fillStyle = (block[i][j] == 1) ? "blue" : "red";
                             ctx.fill();
                             ctx.closePath();
                         }
@@ -165,7 +325,7 @@
                     if (joined[i].leaved == false) { // 접속한 플레이어들만
                         ctx.beginPath();
                         ctx.arc(joined[i].x, joined[i].y, 10, 0, Math.PI * 2);
-                        ctx.fillStyle = "red";
+                        ctx.fillStyle = "gray";
                         ctx.fill();
                         ctx.closePath();
                     }
@@ -185,9 +345,8 @@
         document.addEventListener('keydown', function (event) {
             draw(event);
         });
+    }
     </script>
-
-
+    
 </body>
-
 </html>
