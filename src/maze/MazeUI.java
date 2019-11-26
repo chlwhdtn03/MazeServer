@@ -39,11 +39,11 @@ public class MazeUI extends JFrame {
 		titlelabel.setFont(new Font("맑은 고딕", Font.BOLD, 32));
 		titlelabel.setHorizontalAlignment(SwingUtilities.CENTER);
 		
-		leftLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		leftLabel.setFont(new Font("맑은 고딕", Font.BOLD, 32));
 		leftLabel.setHorizontalAlignment(SwingUtilities.CENTER);
 		
 		
-		startButton.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		startButton.setFont(new Font("맑은 고딕", Font.BOLD, 32));
 		startButton.setContentAreaFilled(false);
 		startButton.setFocusable(false);
 		
@@ -84,7 +84,7 @@ public class MazeUI extends JFrame {
 		JLabel connectDescription = new JLabel("이게 뭔 컴퓨터죠?");
 		try {
 			connectDescription = new JLabel("주소창에 '" + InetAddress.getLocalHost().getHostAddress() + "' 를 입력하세요");
-			connectDescription.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+			connectDescription.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
