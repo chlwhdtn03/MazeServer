@@ -5,6 +5,7 @@
 
 body{
     overflow-x: hidden;
+    background-color: #f6d55c;
 }
 
 .sec {
@@ -19,7 +20,8 @@ body{
 .title {
     font-family: 'Bebas Neue', cursive;
     font-size: 90px;
-    margin-top: -150px;
+    color: #834a7d;
+    margin: 0;
 }
 
 .section {
@@ -33,7 +35,7 @@ body{
 
 .chatting {
     max-height: 501px;
-    overflow: auto;
+    overflow: hidden;
     background: #eee;
     width: 300px;
     margin-left: 32px;
@@ -60,10 +62,14 @@ canvas { background: #eee;}
     margin-left: 22%;
 }
 
+h3{
+    color:  #ff686b ;
+}
+
 #pfTitle{
     font-size: 40px;
     font-family: 'Bebas Neue', cursive;
-
+    color: #834a7d;
     margin-bottom: 50px;
 }
 
@@ -83,6 +89,7 @@ canvas { background: #eee;}
     justify-content: center;
     margin-left: 32px;
     font-family: NanumGothic;
+    color: #4e4e4e;
 
 }
 
@@ -94,13 +101,11 @@ canvas { background: #eee;}
 
 #btn{
     border: none;
-    background-color: white;
+    background-color: #f6d55c;
 }
 
 #Enter{
-    position: relative;
-    top: 250px;
-    left: 300px;
+    position: fixed;
 }
 
 #result-form {

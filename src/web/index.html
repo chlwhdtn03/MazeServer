@@ -44,7 +44,7 @@
             <canvas id="myCanvas" width="720" height="501"
                     onclick=""></canvas>
             <div class="chatting">
-                <input type="text" id="chatinput">
+                <input type="text" id="chatinput" placeholder="채팅을 입력하세요...">
             </div>
         </section>
         
@@ -113,8 +113,8 @@
     </div>
 
     <script>
-
-
+        var timerID = null;
+        var timeleft = 0;
         var id = 0; // 접속했었던 플레이어 수
         var joined = new Array(); // 자신을 제외한 나머지 플레이어들 객체
         var myUser; // 자신 객체
@@ -140,6 +140,7 @@
             this.team = team;
             this.leaved = false; // 나갔는지 여부
         }
+
         function findUser(name) { // 닉네임을 가지고 joined배열에서 플레이어 객체 찾기 (닉네임이 자신일 경우 myUser 반환)
             if (name == myUser.name)
                 return myUser;
@@ -151,6 +152,22 @@
                 }
             }
         }
+
+        function getTime(sec) {
+		var minute = 0, second = sec;
+		var str_min, str_sec;
+		while(true) {
+			if (second >= 60) {
+				second -= 60;
+				minute++;
+			} else {
+				break;
+			}
+		}
+		str_min = String(minute);
+		str_sec = second < 10 ? "0" + String(second) : String(second);
+		return str_min + ":" + str_sec;
+	}
 
         function Main()
         {
@@ -237,6 +254,18 @@
                     $("#result-redscore")[0].style.fontSize = "2rem";
                 }
             }
+            if (cmd[0] == "timeleft") {
+                printchat("<b>게임이 시작됬습니다!</b>", true);
+                timeleft = 0;
+                timeleft = Number(cmd[1]) - 1; // 초 단위로 서버에게 남은 시간을 받고, 오차가 있을 수 있으니 -1
+                timerID = setInterval(function() {
+                    if(timeleft <= 0) {
+                        clearInterval(timerID);
+                        return;
+                    }
+                    $(".title").text(getTime(--timeleft));
+                }, 1000);
+            }
             if (cmd[0] == "setname") {
                 var user = findUser(cmd[2]);
                 if(cmd[1] == "done") {
@@ -264,6 +293,7 @@
             }
             if (cmd[0] == "yourteam") {
                 myUser.team = cmd[1];
+                printchat("<b>당신은 <span style='color:" + cmd[1] + "'>" + cmd[1] + "</span>팀 입니다!</b>" , true);
             }
             if (cmd[0] == "join") {
                 // 서버에게 플레이어 접속 정보 받기
@@ -387,7 +417,7 @@
                         if (block[i][j] > 0) {
                             ctx.beginPath();
                             ctx.rect(i - 10, j - 10, 20, 20);
-                            ctx.fillStyle = (block[i][j] == 1) ? "blue" : "red";
+                            ctx.fillStyle = (block[i][j] == 1) ? "deepskyblue" : "tomato";
                             ctx.fill();
                             ctx.closePath();
                         }
@@ -399,7 +429,7 @@
                     if (joined[i].leaved == false) { // 접속한 플레이어들만
                         ctx.beginPath();
                         ctx.arc(joined[i].x, joined[i].y, 10, 0, Math.PI * 2);
-                        ctx.fillStyle = "gray";
+                        ctx.fillStyle = joined[i].team;
                         ctx.fill();
                         ctx.closePath();
                     }

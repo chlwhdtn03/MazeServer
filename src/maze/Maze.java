@@ -79,6 +79,8 @@ public class Maze {
 					});
 					clients.add(new UserData(ws, cmd[3], Integer.parseInt(cmd[1]), Integer.parseInt(cmd[2]), t));
 					ws.writeFinalTextFrame("yourteam " + t);
+					if(isStart) 
+						ws.writeFinalTextFrame("timeleft " + MazeUI.timeleft);
 
 				}
 				if (cmd[0].equals("chat")) {
