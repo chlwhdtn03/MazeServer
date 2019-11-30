@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,40 @@
     <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!--<script src ="MazeGame.js"></script>-->
+    <link rel="shortcut icon" href="images/icon.png">
+    <link rel="icon" href="images/icon.png">
 </head>
+
 <body>
 
-        <div id="result-form" style="display: none">
-                <div class="result-content">
-                    <form id="result">
-                        <span class="close" onclick="hide()">닫기</span>
-                        <h1 id="resultspan" style="font-size: 50px; text-align: center;"></h1>
-                        <hr style="height: 10px; box-shadow: 0 10px 10px -10px #8c8b8b inset; border: 0;">
-                        <h2 style="padding: 0 30%;color: deepskyblue;">Blue<span id="result-bluescore" style="float: right; text-align: center;"></span></h2>
-                        <h2 style="padding: 0 30%;color: tomato;">Red<span id="result-redscore" style="float: right; text-align: center;"></span></h2>
-                        
-                    </form>
-                </div>
-            </div>
 
-  <img src = "i.jpg" width = "100" hegith = "100" onclick = "Lobby()" id = "Enter"> 
+    <div id="intro-form">
+        <div class="intro-content">
+            <form id="intro">
+                <img src="images/logo.png">
+                <h3>당신은 <span style="color: green;">초록색 원</span>으로 표시됩니다. 당신의 팀은 오른쪽 채팅창에 표시됩니다.</h3>
+                <h3>조작키는 방향키로 움직일 수 있으며, [Space] 키를 누를 경우 자신의 팀 진영으로 만들 수 있습니다.</h3>
+                <h3>[Space] 키는 게임이 시작됬을 때 부터 작동됩니다.</h3>
+                <h3>게임이 종료됬을 때, 가장 많은 진영을 갖고 있는 팀이 승리합니다.</h3>
+                <hr style="height: 10px; box-shadow: 0 5px 5px -5px #8c8b8b inset; border: 0;">
+                <a id="startBtn" onclick="Ingame()">알았으니까 시작합시다!</a>
+            </form>
+        </div>
+    </div>
+
+    <div id="result-form" style="display: none">
+        <div class="result-content">
+            <form id="result">
+                <span class="close" onclick="hide()">닫기</span>
+                <h1 id="resultspan" style="font-size: 50px; text-align: center;"></h1>
+                <hr style="height: 10px; box-shadow: 0 10px 10px -10px #8c8b8b inset; border: 0;">
+                <h2 style="padding: 0 30%;color: deepskyblue;">Blue<span id="result-bluescore"
+                        style="float: right; text-align: center;"></span></h2>
+                <h2 style="padding: 0 30%;color: tomato;">Red<span id="result-redscore"
+                        style="float: right; text-align: center;"></span></h2>
+            </form>
+        </div>
+    </div>
 
     <div class="sec">
         <h1 class="title">DDANG DDA MOK KI</h1>
@@ -39,15 +57,14 @@
 
         <section class="section">
 
-            
 
-            <canvas id="myCanvas" width="720" height="501"
-                    onclick=""></canvas>
+
+            <canvas id="myCanvas" width="720" height="501" onclick=""></canvas>
             <div class="chatting">
                 <input type="text" id="chatinput" placeholder="채팅을 입력하세요...">
             </div>
         </section>
-        
+
     </div>
 
 
@@ -61,12 +78,11 @@
                 <span>대머리 게임 개발자. 병약해보이지만 은근 힘이 쎈 반전매력이 있다.</span>
 
                 <div id="link">
-                    <button onclick="window.open('https://www.facebook.com/profile.php?id=100011682890795', 'demori');" 
-                    id="btn">
+                    <button onclick="window.open('https://www.facebook.com/profile.php?id=100011682890795', 'demori');"
+                        id="btn">
                         <img src="./images/facebook.png" alt="" width="30px">
                     </button>
-                    <button onclick="window.open('https://github.com/ChoiWooHyuk2', 'demori');" 
-                    id="btn">
+                    <button onclick="window.open('https://github.com/ChoiWooHyuk2', 'demori');" id="btn">
                         <img src="./images/-github-.png" alt="" width="30px">
                     </button>
                 </div>
@@ -78,14 +94,12 @@
             <div id="who">
                 <h3>최종수</h3>
                 <span>자랑스러운 애플파이의 부장님이시다. 자바랑 결혼할 예정이다.</span>
-    
+
                 <div id="link">
-                    <button onclick="window.open('https://www.facebook.com/chlwhdtn', 'javalove');" 
-                       id="btn">
+                    <button onclick="window.open('https://www.facebook.com/chlwhdtn', 'javalove');" id="btn">
                         <img src="./images/facebook.png" alt="" width="30px">
                     </button>
-                    <button onclick="window.open('https://github.com/chlwhdtn03', 'javalove');" 
-                    id="btn">
+                    <button onclick="window.open('https://github.com/chlwhdtn03', 'javalove');" id="btn">
                         <img src="./images/-github-.png" alt="" width="30px">
                     </button>
                 </div>
@@ -97,14 +111,14 @@
             <div id="who">
                 <h3>윤원우</h3>
                 <span>내가 짱이다. 그냥 내가 짱이다. <del>뭐래</del></span>
-        
+
                 <div id="link">
-                    <button onclick="window.open('https://www.facebook.com/profile.php?id=100011104596344', 'shinthing');" 
-                       id="btn">
+                    <button
+                        onclick="window.open('https://www.facebook.com/profile.php?id=100011104596344', 'shinthing');"
+                        id="btn">
                         <img src="./images/facebook.png" alt="" width="30px">
                     </button>
-                    <button onclick="window.open('https://github.com/Yoonwonwoo', 'shinthing');" 
-                        id="btn">
+                    <button onclick="window.open('https://github.com/Yoonwonwoo', 'shinthing');" id="btn">
                         <img src="./images/-github-.png" alt="" width="30px">
                     </button>
                 </div>
@@ -128,7 +142,7 @@
         }
 
         function hide() {
-            
+
             $("#result-form").hide();
         }
 
@@ -154,309 +168,309 @@
         }
 
         function getTime(sec) {
-		var minute = 0, second = sec;
-		var str_min, str_sec;
-		while(true) {
-			if (second >= 60) {
-				second -= 60;
-				minute++;
-			} else {
-				break;
-			}
-		}
-		str_min = String(minute);
-		str_sec = second < 10 ? "0" + String(second) : String(second);
-		return str_min + ":" + str_sec;
-	}
-
-        function Main()
-        {
-            
+            var minute = 0, second = sec;
+            var str_min, str_sec;
+            while (true) {
+                if (second >= 60) {
+                    second -= 60;
+                    minute++;
+                } else {
+                    break;
+                }
+            }
+            str_min = String(minute);
+            str_sec = second < 10 ? "0" + String(second) : String(second);
+            return str_min + ":" + str_sec;
         }
 
-        function Lobby()
-        {
+        function Main() {
+
+        }
+
+        /*  11.30 폐기
+        function Lobby() {
             alert("로비입니다.");
             var image = document.getElementById("Enter");
             image.remove();
-            
+
             var image2 = document.createElement("img");
-            image2.setAttribute("src","i2.jpg");
-            image2.setAttribute("height","100");
-            image2.setAttribute("width","100");
-            image2.setAttribute("id","Enter");
-            image2.setAttribute("onclick","Ingame(this)");
+            image2.setAttribute("src", "i2.jpg");
+            image2.setAttribute("height", "100");
+            image2.setAttribute("width", "100");
+            image2.setAttribute("id", "Enter");
+            image2.setAttribute("onclick", "Ingame(this)");
             document.body.prepend(image2);
         }
+        */
 
-        function Ingame(img) {
-        img.remove();
-        
-        webSocket = new WebSocket("ws://" + location.host + "/maze");
-        webSocket.onopen = function () { // 서버 접속됬을 때
-            var x = canvas.width / 2;
-            var y = canvas.height - 30;
-            var name = Math.floor(Math.random() * 10000) + 1;
-            webSocket.send("join " + x + " " + y + " " + name + " "); // 서버에 닉네임, x, y 정보 전송
-            myUser = new User(name, x, y); // 자신의 객체정보 설정
-            draw();
-        };
-        webSocket.onclose = function () { // 서버 닫혔을때, 접속 안될때
-            alert("서버와 연결이 끊겼습니다.");
-        };
-        webSocket.onmessage = function (a) {
-            console.log(a.data);
-            var cmd = a.data.split(" ");
-            // move (nickname) (x좌표) (y좌표)
-            // 라고 메세지가 오면,
-            // cmd[0]은 move, cmd[1]은 (nickname), cmd[2]에는 (x좌표), cmd[3]에는 (y좌표)
-            if (cmd[0] == "move") { 
-                // 서버에게 좌표 받고 해당 플레이어 움직이기
-                var user = findUser(cmd[1]);
-                user.x = parseInt(cmd[2]);
-                user.y = parseInt(cmd[3]);
-                draw(); // 캔버스 새로고침
-            }
-            if  (cmd[0] == "end") { // 끝났을 경우
-                var result_blue = 0, result_red = 0;
-                for (var i = 1; i <= 719; i++) {
-                    for (var j = 1; j <= 500; j++) {
-                        if(block[i][j] == 1) {
-                            result_blue++;
-                        } else if(block[i][j] == 2) {
-                            result_red++;
+        function Ingame() {
+            $("#intro-form").remove();
+            webSocket = new WebSocket("ws://" + location.host + "/maze");
+            webSocket.onopen = function () { // 서버 접속됬을 때
+                var x = canvas.width / 2;
+                var y = canvas.height - 30;
+                var name = Math.floor(Math.random() * 10000) + 1;
+                webSocket.send("join " + x + " " + y + " " + name + " "); // 서버에 닉네임, x, y 정보 전송
+                myUser = new User(name, x, y); // 자신의 객체정보 설정
+                draw();
+            };
+            webSocket.onclose = function () { // 서버 닫혔을때, 접속 안될때
+                alert("서버와 연결이 끊겼습니다.");
+            };
+            webSocket.onmessage = function (a) {
+                console.log(a.data);
+                var cmd = a.data.split(" ");
+                // move (nickname) (x좌표) (y좌표)
+                // 라고 메세지가 오면,
+                // cmd[0]은 move, cmd[1]은 (nickname), cmd[2]에는 (x좌표), cmd[3]에는 (y좌표)
+                if (cmd[0] == "move") {
+                    // 서버에게 좌표 받고 해당 플레이어 움직이기
+                    var user = findUser(cmd[1]);
+                    user.x = parseInt(cmd[2]);
+                    user.y = parseInt(cmd[3]);
+                    draw(); // 캔버스 새로고침
+                }
+                if (cmd[0] == "end") { // 끝났을 경우
+                    var result_blue = 0, result_red = 0;
+                    for (var i = 1; i <= 719; i++) {
+                        for (var j = 1; j <= 500; j++) {
+                            if (block[i][j] == 1) {
+                                result_blue++;
+                            } else if (block[i][j] == 2) {
+                                result_red++;
+                            }
                         }
                     }
+                    $("#result-form").show();
+                    if (result_blue > result_red) {
+                        $("#resultspan").text("BLUE팀이 승리했습니다!");
+                        $("#resultspan")[0].style.color = "deepskyblue";
+                        $("#result-bluescore").text(result_blue + "블럭");
+                        $("#result-redscore").text(result_red + "블럭");
+                        $("#result-bluescore")[0].style.fontSize = "2rem"
+                        $("#result-redscore")[0].style.fontSize = "1.2rem";
+
+
+                    } else if (result_blue < result_red) {
+                        $("#resultspan").text("RED팀이 승리했습니다!");
+                        $("#resultspan")[0].style.color = "tomato";
+                        $("#result-bluescore").text(result_blue + "블럭");
+                        $("#result-redscore").text(result_red + "블럭");
+                        $("#result-bluescore")[0].style.fontSize = "1.2rem"
+                        $("#result-redscore")[0].style.fontSize = "2rem";
+                    } else {
+                        $("#resultspan").text("동점입니다!");
+                        $("#resultspan")[0].style.color = "gray";
+                        $("#result-bluescore").text(result_blue + "블럭");
+                        $("#result-redscore").text(result_red + "블럭");
+                        $("#result-bluescore")[0].style.fontSize = "2rem"
+                        $("#result-redscore")[0].style.fontSize = "2rem";
+                    }
                 }
-                $("#result-form").show();
-                if(result_blue > result_red) {
-                    $("#resultspan").text("BLUE팀이 승리했습니다!");
-                    $("#resultspan")[0].style.color = "deepskyblue";
-                    $("#result-bluescore").text(result_blue + "블럭");
-                    $("#result-redscore").text(result_red + "블럭");
-                    $("#result-bluescore")[0].style.fontSize = "2rem"
-                    $("#result-redscore")[0].style.fontSize = "1.2rem";
-                    
-                
-                } else if(result_blue < result_red) {
-                    $("#resultspan").text("RED팀이 승리했습니다!");
-                    $("#resultspan")[0].style.color = "tomato";
-                    $("#result-bluescore").text(result_blue + "블럭");
-                    $("#result-redscore").text(result_red + "블럭");
-                    $("#result-bluescore")[0].style.fontSize = "1.2rem"
-                    $("#result-redscore")[0].style.fontSize = "2rem";
-                } else {
-                    $("#resultspan").text("동점입니다!");
-                    $("#resultspan")[0].style.color = "gray";
-                    $("#result-bluescore").text(result_blue + "블럭");
-                    $("#result-redscore").text(result_red + "블럭");
-                    $("#result-bluescore")[0].style.fontSize = "2rem"
-                    $("#result-redscore")[0].style.fontSize = "2rem";
+                if (cmd[0] == "timeleft") {
+                    printchat("<b>게임이 시작됬습니다!</b>", true);
+                    timeleft = 0;
+                    timeleft = Number(cmd[1]) - 1; // 초 단위로 서버에게 남은 시간을 받고, 오차가 있을 수 있으니 -1
+                    timerID = setInterval(function () {
+                        if (timeleft <= 0) {
+                            clearInterval(timerID);
+                            return;
+                        }
+                        $(".title").text(getTime(--timeleft));
+                    }, 1000);
                 }
-            }
-            if (cmd[0] == "timeleft") {
-                printchat("<b>게임이 시작됬습니다!</b>", true);
-                timeleft = 0;
-                timeleft = Number(cmd[1]) - 1; // 초 단위로 서버에게 남은 시간을 받고, 오차가 있을 수 있으니 -1
-                timerID = setInterval(function() {
-                    if(timeleft <= 0) {
-                        clearInterval(timerID);
+                if (cmd[0] == "setname") {
+                    var user = findUser(cmd[2]);
+                    if (cmd[1] == "done") {
+                        user.name = cmd[3];
+
+                        if (myUser == user)
+                            printchat("닉네임을 " + user.name + "으로 변경했습니다.", true);
+                    }
+
+                    if (cmd[1] == "fail") {
+                        if (myUser == user)
+                            printchat("닉네임을 변경하지 못했습니다.", true);
+                    }
+
+                }
+                if (cmd[0] == "chat") {
+                    // 서버에게 채팅 데이터 받고 출력하기 
+                    var msg = new String();
+                    for (var i = 2; i < cmd.length; i++) {
+                        msg += " " + cmd[i];
+                    }
+                    var user = findUser(cmd[1]);
+
+                    printchat(user.name + " - " + msg);
+                }
+                if (cmd[0] == "yourteam") {
+                    myUser.team = cmd[1];
+                    printchat("<b>당신은 <span style='color:" + cmd[1] + "'>" + cmd[1] + "</span>팀 입니다!</b>", true);
+                }
+                if (cmd[0] == "join") {
+                    // 서버에게 플레이어 접속 정보 받기
+                    // 서버에 나중에 들어왔을때, 새로운 플레이어가 들어왔을때, 서버에게 정보 받음
+                    if (cmd[1] == myUser.name)
                         return;
-                    }
-                    $(".title").text(getTime(--timeleft));
-                }, 1000);
-            }
-            if (cmd[0] == "setname") {
-                var user = findUser(cmd[2]);
-                if(cmd[1] == "done") {
-                    user.name = cmd[3];
-                    
-                    if(myUser == user)
-                        printchat("닉네임을 " + user.name + "으로 변경했습니다.", true);
+                    joined[id++] = new User(cmd[1], parseInt(cmd[2]), parseInt(cmd[3]), cmd[4]);
+                    draw(); // 새로 들어온 플레이어 표시해야 되니까 새로고침
                 }
+                if (cmd[0] == "leave") {
+                    // 서버에게 플레이어 접속 해제 정보 받기
+                    if (cmd[1] == myUser.name)
+                        return;
+                    findUser(cmd[1]).leaved = true;
+                    draw(); // 나간 플레이어 지워야 되니까 새로고침
+                }
+                if (cmd[0] == "block") { // 장애물 관련 메세지
+                    // 서버에게 장애물 정보 받기
+                    // 서버에 나중에 들어왔을때, 블럭이 설치되었을때, 서버에게 정보 받음
+                    if (cmd[1] == "place") {
+                        if (cmd[4] == "blue" && block[parseInt(cmd[2])][parseInt(cmd[3])] != 1) {
+                            blue_point++;
+                            if (cmd[4] == "blue" && block[parseInt(cmd[2])][parseInt(cmd[3])] == 2)
+                                red_point--;
+                        }
+                        else if (cmd[4] == "red" && block[parseInt(cmd[2])][parseInt(cmd[3])] != 2) {
+                            red_point++;
+                            if (cmd[4] == "red" && block[parseInt(cmd[2])][parseInt(cmd[3])] == 1)
+                                blue_point--;
+                        }
 
-                if(cmd[1] == "fail") {
-                    if(myUser == user)
-                        printchat("닉네임을 변경하지 못했습니다.", true);
-                }
-                
-            }
-            if (cmd[0] == "chat") {
-                // 서버에게 채팅 데이터 받고 출력하기 
-                var msg = new String();
-                for (var i = 2; i < cmd.length; i++) {
-                    msg += " " + cmd[i];
-                }
-                var user = findUser(cmd[1]);
-                
-                printchat(user.name + " - " + msg);
-            }
-            if (cmd[0] == "yourteam") {
-                myUser.team = cmd[1];
-                printchat("<b>당신은 <span style='color:" + cmd[1] + "'>" + cmd[1] + "</span>팀 입니다!</b>" , true);
-            }
-            if (cmd[0] == "join") {
-                // 서버에게 플레이어 접속 정보 받기
-                // 서버에 나중에 들어왔을때, 새로운 플레이어가 들어왔을때, 서버에게 정보 받음
-                if (cmd[1] == myUser.name)
-                    return;
-                joined[id++] = new User(cmd[1], parseInt(cmd[2]), parseInt(cmd[3]), cmd[4]);
-                draw(); // 새로 들어온 플레이어 표시해야 되니까 새로고침
-            }
-            if (cmd[0] == "leave") {
-                // 서버에게 플레이어 접속 해제 정보 받기
-                if (cmd[1] == myUser.name)
-                    return;
-                findUser(cmd[1]).leaved = true;
-                draw(); // 나간 플레이어 지워야 되니까 새로고침
-            }
-            if (cmd[0] == "block") { // 장애물 관련 메세지
-                // 서버에게 장애물 정보 받기
-                // 서버에 나중에 들어왔을때, 블럭이 설치되었을때, 서버에게 정보 받음
-                if (cmd[1] == "place") {
-                    if(cmd[4] == "blue" && block[parseInt(cmd[2])][parseInt(cmd[3])] != 1) {
-                        blue_point++;
-                        if(cmd[4] == "blue" && block[parseInt(cmd[2])][parseInt(cmd[3])] == 2) 
-                            red_point--;
-                    }
-                    else if(cmd[4] == "red" && block[parseInt(cmd[2])][parseInt(cmd[3])] != 2) {
-                        red_point++;
-                        if(cmd[4] == "red" && block[parseInt(cmd[2])][parseInt(cmd[3])] == 1) 
+                        block[parseInt(cmd[2])][parseInt(cmd[3])] = (cmd[4] == "blue") ? 1 : 2; // 서버에서 준 장애물 좌표로 블럭 설치
+
+                    } else if (cmd[1] == "destory") {
+                        if (block[parseInt(cmd[2])][parseInt(cmd[3])] == 1) {
                             blue_point--;
+                        } else if (block[parseInt(cmd[2])][parseInt(cmd[3])] == 2) {
+                            red_point--;
+                        }
+                        block[parseInt(cmd[2])][parseInt(cmd[3])] = 0; // 서버에서 준 장애물 좌표로 블럭 제거
+                    }
+                    $(".progress-fill")[0].style.width = ((red_point / (red_point + blue_point)) * 100) + "%";
+                    draw(); // 캔버스 새로고침
+                }
+            }
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            var dx = 20;
+            var dy = -20;
+
+            function printchat(msg, servermsg) {
+                var p = document.createElement("p");
+                if (!servermsg) {
+                    var user = findUser(msg.split(" - ")[0]);
+                    p.style.color = (user.team == "blue") ? "blue" : "red";
+                }
+                p.innerHTML = msg;
+                p.style.margin = "0";
+                if (document.getElementsByClassName("chatting")[0].children.length >= 20) {
+                    document.getElementsByClassName("chatting")[0].removeChild(document.getElementsByClassName("chatting")[0].childNodes[2]);
+                }
+                document.getElementsByClassName("chatting")[0].appendChild(p);
+            }
+
+            $("input[id=chatinput]").keypress(function (e) {
+
+                if (e.keyCode == 13) {
+                    webSocket.send("chat " + $("input[id=chatinput]").val());
+                    $("input[id=chatinput]").val("");
+                }
+            });
+
+            function draw(event) {
+
+
+
+                if (event != undefined) { // 키보드 눌렀을때 true
+                    // 키보드를 눌렀을때 위치 이동 정보를 서버에게 전송
+                    // ※ 정보 전송만 하기 때문에 그림 그리는 기능은 지금 이 IF문 안에서 사용하면 안댐 ※
+                    var rx = myUser.x;
+                    var ry = myUser.y;
+                    if (myUser.y > 20) { //up
+                        if (event.keyCode == 38)
+                            ry += dy;
+                    }
+                    if (myUser.y < 490) {
+                        if (event.keyCode == 40)
+                            //down
+                            ry -= dy;
+                    }
+                    if (myUser.x > 20) {
+                        //left
+                        if (event.keyCode == 37)
+                            rx -= dx;
+                    }
+                    if (myUser.x < 700) {
+                        //right
+                        if (event.keyCode == 39)
+                            rx += dx;
+                    }
+                    if (event.keyCode == 32) {
+                        webSocket.send("block place " + rx + " " + ry); // 블럭 설치 요청
+                        // block[myUser.x][myUser.y] = 1;
+                    }
+                    if (event.keyCode == 69) {
+                        webSocket.send("block destory " + rx + " " + ry); // 블럭 파괴 요청
+                        // block[myUser.x][myUser.y] = 0;
+                    }
+                    if (rx != myUser.x || ry != myUser.y) { // 방향키 눌렀을때 
+                        console.log(rx, ry);
+                        webSocket.send("move " + rx + " " + ry); // 서버에게 자신의 x와 y좌표 전송
+                    }
+                } else {
+                    // 서버에서 플레이어들, 장애물 위치 새로고침 할때 실행됨
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    /* 장애물 그리기 */
+                    for (var i = 1; i <= 719; i++) {
+                        for (var j = 1; j <= 500; j++) {
+
+                            if (block[i][j] > 0) {
+                                ctx.beginPath();
+                                ctx.rect(i - 10, j - 10, 20, 20);
+                                ctx.fillStyle = (block[i][j] == 1) ? "deepskyblue" : "tomato";
+                                ctx.fill();
+                                ctx.closePath();
+                            }
+                        }
                     }
 
-                    block[parseInt(cmd[2])][parseInt(cmd[3])] = (cmd[4] == "blue") ? 1 : 2; // 서버에서 준 장애물 좌표로 블럭 설치
-                    
-                } else if(cmd[1] == "destory") {
-                    if(block[parseInt(cmd[2])][parseInt(cmd[3])] == 1) {
-                        blue_point--;
-                    } else if(block[parseInt(cmd[2])][parseInt(cmd[3])] == 2) {
-                        red_point--;
-                    }        
-                    block[parseInt(cmd[2])][parseInt(cmd[3])] = 0; // 서버에서 준 장애물 좌표로 블럭 제거
-                }
-                $(".progress-fill")[0].style.width = ((red_point / (red_point + blue_point)) * 100) + "%"; 
-                draw(); // 캔버스 새로고침
-            }
-        }
-        var canvas = document.getElementById("myCanvas");
-        var ctx = canvas.getContext("2d");
-        var dx = 20;
-        var dy = -20;
-
-        function printchat(msg, servermsg) {
-            var p = document.createElement("p");
-            if(!servermsg) {
-                var user = findUser(msg.split(" - ")[0]);
-                p.style.color = (user.team == "blue") ? "blue" : "red";
-            }
-            p.innerHTML = msg;
-            p.style.margin = "0";
-            if(document.getElementsByClassName("chatting")[0].children.length >= 20) {
-                document.getElementsByClassName("chatting")[0].removeChild(document.getElementsByClassName("chatting")[0].childNodes[2]);
-            }
-            document.getElementsByClassName("chatting")[0].appendChild(p);
-        }
-
-        $("input[id=chatinput]").keypress(function (e) {
-
-            if (e.keyCode == 13) {
-                webSocket.send("chat " + $("input[id=chatinput]").val());
-                $("input[id=chatinput]").val("");
-            }
-        });
-
-        function draw(event) {
-
-         
-
-            if (event != undefined) { // 키보드 눌렀을때 true
-            // 키보드를 눌렀을때 위치 이동 정보를 서버에게 전송
-            // ※ 정보 전송만 하기 때문에 그림 그리는 기능은 지금 이 IF문 안에서 사용하면 안댐 ※
-                var rx = myUser.x;
-                var ry = myUser.y;
-                if (myUser.y > 20) { //up
-                    if (event.keyCode == 38)
-                        ry += dy;
-                }
-                if (myUser.y < 490) {
-                    if (event.keyCode == 40)
-                        //down
-                        ry -= dy;
-                }
-                if (myUser.x > 20) {
-                    //left
-                    if (event.keyCode == 37)
-                        rx -= dx;
-                }
-                if (myUser.x < 700) {
-                    //right
-                    if (event.keyCode == 39)
-                        rx += dx;
-                }
-                if (event.keyCode == 32) {
-                    webSocket.send("block place " + rx + " " + ry); // 블럭 설치 요청
-                    // block[myUser.x][myUser.y] = 1;
-                }
-                if (event.keyCode == 69) {
-                    webSocket.send("block destory " + rx + " " + ry); // 블럭 파괴 요청
-                    // block[myUser.x][myUser.y] = 0;
-                }
-                if(rx != myUser.x || ry != myUser.y) { // 방향키 눌렀을때 
-                    console.log(rx, ry);
-                    webSocket.send("move " + rx + " " + ry); // 서버에게 자신의 x와 y좌표 전송
-                }
-            } else { 
-                // 서버에서 플레이어들, 장애물 위치 새로고침 할때 실행됨
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                /* 장애물 그리기 */
-                for (var i = 1; i <= 719; i++) {
-                    for (var j = 1; j <= 500; j++) {
-                        
-                        if (block[i][j] > 0) {
+                    /* 다른 플레이어 그리기 */
+                    for (var i = 0; i < id; i++) {
+                        if (joined[i].leaved == false) { // 접속한 플레이어들만
                             ctx.beginPath();
-                            ctx.rect(i - 10, j - 10, 20, 20);
-                            ctx.fillStyle = (block[i][j] == 1) ? "deepskyblue" : "tomato";
+                            ctx.arc(joined[i].x, joined[i].y, 10, 0, Math.PI * 2);
+                            ctx.fillStyle = joined[i].team;
                             ctx.fill();
                             ctx.closePath();
                         }
                     }
+
+                    /* 자기 캐릭터 그리기 */
+                    ctx.beginPath();
+                    ctx.arc(myUser.x, myUser.y, 10, 0, Math.PI * 2);
+                    ctx.fillStyle = "green";
+                    ctx.fill();
+                    ctx.closePath();
                 }
 
-                /* 다른 플레이어 그리기 */
-                for (var i = 0; i < id; i++) {
-                    if (joined[i].leaved == false) { // 접속한 플레이어들만
-                        ctx.beginPath();
-                        ctx.arc(joined[i].x, joined[i].y, 10, 0, Math.PI * 2);
-                        ctx.fillStyle = joined[i].team;
-                        ctx.fill();
-                        ctx.closePath();
-                    }
-                }
 
-                /* 자기 캐릭터 그리기 */
-                ctx.beginPath();
-                ctx.arc(myUser.x, myUser.y, 10, 0, Math.PI * 2);
-                ctx.fillStyle = "green";
-                ctx.fill();
-                ctx.closePath();
             }
 
 
-        }
-
-
-        window.onkeydown = function(e) {
-            if($("#chatinput")[0] != document.activeElement)
+            window.onkeydown = function (e) {
+                if ($("#chatinput")[0] != document.activeElement)
                     return !(e.keyCode == 32 || e.keyCode == 40);
-         };
+            };
 
-        document.addEventListener('keydown', function (event) {
-            draw(event);
-        });
-    }
+            document.addEventListener('keydown', function (event) {
+                draw(event);
+            });
+        }
     </script>
-    
+
 </body>
+
 </html>
