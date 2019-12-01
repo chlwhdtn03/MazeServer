@@ -149,8 +149,11 @@ public class Maze {
 				System.out.println(port + " 포트로 개방 성공");
 				getUI.print(port + " 포트로 게임 페이지를 개방했습니다.");
 			} else {
+				
 				System.out.println(port + " 포트로 개방 실패");
 				getUI.print(port + " 포트로 게임 페이지를 개방하지 못했습니다.");
+				getUI.print("[에러] " + result.cause().getLocalizedMessage());
+				getUI.print("[에러] " + result.cause().getMessage());
 			}
 		});
 	}
