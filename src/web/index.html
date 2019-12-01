@@ -359,11 +359,12 @@
 
             function printchat(msg, servermsg) {
                 var p = document.createElement("p");
+                p.innerHTML = msg;
                 if (!servermsg) {
                     var user = findUser(msg.split(" - ")[0]);
                     p.style.color = (user.team == "blue") ? "blue" : "red";
+                    p.innerText = msg;
                 }
-                p.innerHTML = msg;
                 p.style.margin = "0";
                 if (document.getElementsByClassName("chatting")[0].children.length >= 20) {
                     document.getElementsByClassName("chatting")[0].removeChild(document.getElementsByClassName("chatting")[0].childNodes[2]);
